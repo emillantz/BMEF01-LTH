@@ -1,0 +1,109 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{pgfgantt}
+\usepackage{pgfmath-xfp}
+\usepackage{amsmath}
+
+\begin{document}
+\definecolor{barblue}{RGB}{153,204,254}
+\definecolor{groupblue}{RGB}{51,102,254}
+\definecolor{linkred}{RGB}{165,0,33}
+\renewcommand\sfdefault{phv}
+\renewcommand\mddefault{mc}
+\renewcommand\bfdefault{bc}
+\setganttlinklabel{s-s}{START-TO-START}
+\setganttlinklabel{f-s}{FINISH-TO-START}
+\setganttlinklabel{f-f}{FINISH-TO-FINISH}
+\sffamily
+
+\section*{\textbf{Projektplan Grupp 11}}
+
+\subsection*{Projektets syfte}
+Uppgiften är att utveckla en kamera som styrs av externa ljudkällor. Vid t.ex. ett inbrott ska mikrofoner länkade till kameran kunna detektera ljudet av
+ex. en krossad glasruta och trigga kameran till att filma ljudkällan.
+\subsection*{Genomförande}
+Projektet har 2 tillvägagångssätt, A och B. Plan A går ut på att placera 3 mikrofoner runt kameradonet för att kunna triangulera ljudkällan.
+Plan B är att placera ut mikrofoner i "POI" (Point-of-Interest) och lagra dessa positioner i centraldatorn med hjälp av en kalibrering vid setup.
+Vilket av dessa tillvägagångssätt som är bäst bestämms efter gruppen har lagt sin första beställning och fått tillgång till komponenterna som kommer användas
+för projektet, och testat dess egenskaper (ekon, tid-mot-frekvensupplösning mm). I båda fallen kommer kameran att stryas via en centraldator (Raspberry Pi 3)
+som enligt AXIS specifikation ska skicka HTTP-requests till kamerans API, VAPIX. HTTP-klienten kommer ta emot triggers från en mikrokontroller kopplad till
+mikrofonerna.
+\pagebreak
+\subsection*{Delmål}
+Nedan är ett gantt-schema som visar projektets delmål och hur de är kopplade till varandra. Målet är att projektet ska vara helt färdigt den 5:e maj, vilket är
+12 veckor från att projektets första beställning läggs.
+
+\hspace{-3cm}
+\begin{ganttchart}[
+    canvas/.append style={fill=none, draw=black!5, line width=.75pt},
+    hgrid style/.style={draw=black!5, line width=.75pt},
+    vgrid={*1{draw=black!5, line width=.75pt}},
+    today=0,
+    today rule/.style={
+      draw=black!64,
+      dash pattern=on 3.5pt off 4.5pt,
+      line width=1.5pt,
+    },
+    today label font=\small\bfseries,
+    title/.style={draw=none, fill=none},
+    title label font=\bfseries\footnotesize,
+    title label node/.append style={below=7pt},
+    include title in canvas=false,
+    bar label font=\mdseries\small\color{black!70},
+    bar label node/.append style={left=2cm},
+    bar/.append style={draw=none, fill=black!63},
+    bar incomplete/.append style={fill=barblue},
+    bar progress label font=\mdseries\footnotesize\color{black!70},
+    group incomplete/.append style={fill=groupblue},
+    group left shift=0,
+    group right shift=0,
+    group height=.5,
+    group peaks tip position=0,
+    group label node/.append style={left=.6cm},
+    group progress label font=\bfseries\small,
+    link/.style={-latex, line width=1.5pt, linkred},
+    link label font=\scriptsize\bfseries,
+    link label node/.append style={below left=-2pt and 0pt}
+  ]{1}{12}
+  \gantttitle[
+    title label node/.append style={below left=7pt and -3pt}
+  ]{Vecka:\quad1}{1}
+  \gantttitlelist{2,...,12}{1} \\
+  \ganttgroup[progress=0]{WBS 1: Hårdvara}{1}{12} \\
+  \ganttbar[
+    progress=0,
+    name=WBS1A
+  ]{\textbf{WBS 1.1} Första komponentbeställning}{1}{2} \\
+  \ganttbar[
+    progress=0,
+    name=WBS1B
+  ]{\textbf{WBS 1.2} Test av komponenter. Val av plan A / B}{2}{3} \\
+  \ganttbar[
+    progress=0,
+    name=WBS1C
+  ]{\textbf{WBS 1.3} Tentaplugg/Tentaperiod}{4}{5} \\
+  \ganttbar[
+    progress=0,
+    name=WBS1D
+  ]{\textbf{WBS 1.4} Hårdvarudesign: Mikrofoner och microkontroller}{6}{7} \\
+  \ganttbar[
+    progress=0,
+    name=WBS1E
+  ]{\textbf{WBS 1.5} Omtentaplugg/Omtentaperiod}{8}{10} \\
+
+  \ganttbar[
+    progress=0,
+    name=WBS1F
+  ]{\textbf{WBS 1.6} Kommunicera mellan MCU och centraldator}{11}{12} \\ [grid]
+
+  \ganttgroup[progress=0]{WBS 2 Mjukvara}{6}{12} \\
+  \ganttbar[progress=0]{\textbf{WBS 2.1} Utveckling av HTTP-klient}{6}{11} \\
+  \ganttbar[progress=0]{\textbf{WBS 2.2} Kommunicera mellan MCU och centraldator}{11}{12} \\
+\end{ganttchart}
+
+
+\subsection*{Kommunikation}
+Kommunikation med handledare kommer föras via mail och möte på AXIS kontor varannan fredag. Intern kommunikation i gruppen kommer hållas via 'messenger', 
+eftersom det visat sig fungera under tidigare planering.
+\end{document}
