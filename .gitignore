@@ -4,3 +4,7 @@
 *.log
 **.gz
 *.pdf
+
+# Added by cargo
+
+/target

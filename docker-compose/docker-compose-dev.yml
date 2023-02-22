@@ -1,0 +1,13 @@
+version: '3.3'
+services:
+  project-db:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+    ports: 
+      - "5433:5432"
+    volumes:
+      - ../db:/var/lib/postgresql/data
+
