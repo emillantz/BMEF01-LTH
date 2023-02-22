@@ -1,3 +1,5 @@
+//AUTHOR: Emil Lantz 2023
+
 use actix_web::{web, App, HttpServer};
 use actix_cors::Cors;
 
